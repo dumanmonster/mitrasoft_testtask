@@ -6,16 +6,17 @@ import {
   FETCH_USER_POSTS_FAILURE
 } from './userActionTypes';
 
-export const fetchUserPosts = (userId) => {
-  return async (dispatch) => {
-    try {
-      dispatch({ type: FETCH_USER_POSTS });
-      const response = await axios.get(
-        `https://jsonplaceholder.typicode.com/posts?userId=${userId}`
-      );
-      dispatch({ type: FETCH_USER_POSTS_SUCCESS, payload: response.data });
-    } catch (error) {
-      dispatch({ type: FETCH_USER_POSTS_FAILURE, payload: error.message });
-    }
-  };
-};
+export const fetchUserPosts = (userId) => ({
+  type: FETCH_USER_POSTS,
+  payload: userId,
+});
+
+export const fetchUserPostsSuccess = (posts) => ({
+  type: FETCH_USER_POSTS_SUCCESS,
+  payload: posts,
+});
+
+export const fetchUserPostsFailure = (error) => ({
+  type: FETCH_USER_POSTS_FAILURE,
+  payload: error,
+});
