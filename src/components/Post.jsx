@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button, Card, Image } from "react-bootstrap";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
 import image from "../images/avatar.jpg";
 const Post = ({ post, onToggleComments, comments }) => {

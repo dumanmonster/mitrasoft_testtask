@@ -1,6 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
-import { Button, Card } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 
 const About = () => {
   return (
