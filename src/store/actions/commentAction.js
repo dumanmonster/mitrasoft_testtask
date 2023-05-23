@@ -1,20 +1,18 @@
 import {
-  FETCH_COMMENTS,
-  FETCH_COMMENTS_FAILURE,
-  FETCH_COMMENTS_SUCCESS,
+  FETCH_ALL_COMMENTS,
+  FETCH_ALL_COMMENTS_FAILURE,
+  FETCH_ALL_COMMENTS_SUCCESS,
 } from "./commentActionTypes";
 
-export const fetchComments = (postId) => ({
-  type: FETCH_COMMENTS,
-  payload: postId,
+export const fetchAllComments = () => ({
+  type: FETCH_ALL_COMMENTS,
 });
-
-export const fetchCommentsSuccess = (comments) => ({
-  type: FETCH_COMMENTS_SUCCESS,
+export const fetchAllCommentsSuccess = (comments) => ({
+  type: FETCH_ALL_COMMENTS_SUCCESS,
   payload: comments,
 });
 
-export const fetchCommentsFailure = (error) => ({
-  type: FETCH_COMMENTS_FAILURE,
+export const fetchAllCommentsFailure = (error) => ({
+  type: FETCH_ALL_COMMENTS_FAILURE,
   payload: error,
 });

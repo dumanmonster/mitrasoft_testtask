@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Card, Button } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-const Post = ({ post, comments, onToggleComments }) => {
+const Post = ({ post, onToggleComments, comments }) => {
   const [showComments, setShowComments] = useState(false);
-
+ 
   const toggleComments = () => {
     setShowComments(!showComments);
     onToggleComments(post.id);
