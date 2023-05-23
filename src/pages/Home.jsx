@@ -1,7 +1,7 @@
-// pages/Home.js
+
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import Container from 'react-bootstrap/Container';
 import Loader from "../components/Loader";
 import Post from "../components/Post";
 import { fetchPosts, toggleComments } from "../store/actions/postActions";
@@ -29,7 +29,8 @@ const Home = () => {
     return postComments;
   };
   return (
-    <div>
+    <Container fluid className="d-flex flex-column align-items-center">
+      <h2 className="m-4">Посты</h2>
       {loading ? (
         <Loader />
       ) : (
@@ -42,7 +43,7 @@ const Home = () => {
           />
         ))
       )}
-    </div>
+    </Container>
   );
 };
 

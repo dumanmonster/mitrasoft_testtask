@@ -1,5 +1,5 @@
 import axios from "axios";
-import { all, call, put, takeEvery, delay} from "redux-saga/effects";
+import { all, call, put, takeEvery, delay } from "redux-saga/effects";
 import {
   FETCH_ALL_COMMENTS,
   FETCH_ALL_COMMENTS_FAILURE,
@@ -14,6 +14,9 @@ import {
   FETCH_USER_POSTS,
   FETCH_USER_POSTS_FAILURE,
   FETCH_USER_POSTS_SUCCESS,
+  FETCH_USER,
+  FETCH_USER_FAILURE,
+  FETCH_USER_SUCCESS,
 } from "../actions/userActionTypes";
 
 function* fetchPostsSaga() {
@@ -34,11 +37,23 @@ function* fetchUserPostsSaga(action) {
     yield delay(500);
     const response = yield call(
       axios.get,
-      `https://jsonplaceholder.typicode.com/posts?userId=${action.payload}`
+      `https://jsonplaceholder.typicode.com/users/${action.payload}/posts`
     );
     yield put({ type: FETCH_USER_POSTS_SUCCESS, payload: response.data });
   } catch (error) {
     yield put({ type: FETCH_USER_POSTS_FAILURE, payload: error.message });
+  }
+}
+function* fetchUserSaga(action) {
+  try {
+    yield delay(500);
+    const response = yield call(
+      axios.get,
+      `https://jsonplaceholder.typicode.com/users/${action.payload}`
+    );
+    yield put({ type: FETCH_USER_SUCCESS, payload: response.data });
+  } catch (error) {
+    yield put({ type: FETCH_USER_FAILURE, payload: error.message });
   }
 }
 function* fetchAllCommentsSaga() {
@@ -64,7 +79,15 @@ function* watchFetchComments() {
 function* watchFetchUserPosts() {
   yield takeEvery(FETCH_USER_POSTS, fetchUserPostsSaga);
 }
+function* watchFetchUser() {
+  yield takeEvery(FETCH_USER, fetchUserSaga);
+}
 
 export default function* rootSaga() {
-  yield all([watchFetchPosts(), watchFetchUserPosts(), watchFetchComments()]);
+  yield all([
+    watchFetchPosts(),
+    watchFetchUserPosts(),
+    watchFetchComments(),
+    watchFetchUser(),
+  ]);
 }
