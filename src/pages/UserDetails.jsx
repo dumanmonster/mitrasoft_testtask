@@ -37,7 +37,7 @@ const UserDetails = () => {
   };
 
   return (
-    <Container className="d-flex flex-column align-items-center">
+    <Container fluid className="d-flex flex-column align-items-center">
       {user && user.name ? (
         <>
           <div className="d-flex gap-4 w-100">

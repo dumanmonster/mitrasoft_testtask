@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Image } from "react-bootstrap";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
-
+import image from "../images/avatar.jpg";
 const Post = ({ post, onToggleComments, comments }) => {
   const [showComments, setShowComments] = useState(false);
   const navigate = useNavigate();
@@ -13,6 +13,17 @@ const Post = ({ post, onToggleComments, comments }) => {
   return (
     <Card className="mb-4 bg-dark text-white w-100">
       <Card.Body>
+        <Image
+          src={image}
+          alt="author"
+          roundedCircle
+          width="30px"
+          onClick={() =>
+            navigate(`/users/${post.userId}`, {
+              state: { userId: post.userId },
+            })
+          }
+        />
         <Card.Title>{post.title}</Card.Title>
         <Card.Text>{post.body}</Card.Text>
         <Button variant="secondary" onClick={toggleComments}>
@@ -24,7 +35,11 @@ const Post = ({ post, onToggleComments, comments }) => {
               <Card key={comment.id} className="my-2 bg-secondary text-white">
                 <Card.Body>
                   <div className="d-flex align-items-center mb-2">
-                    <AccountCircleIcon
+                    <Image
+                      src={image}
+                      alt="author"
+                      roundedCircle
+                      width="30px"
                       className="mr-2"
                       onClick={() =>
                         navigate(`/users/${comment.id}`, {
