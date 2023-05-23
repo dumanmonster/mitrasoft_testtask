@@ -1,10 +1,9 @@
-// postActions.js
 import {
   FETCH_POSTS,
   FETCH_POSTS_SUCCESS,
   FETCH_POSTS_FAILURE,
-  TOGGLE_COMMENTS
-} from './postActionTypes';
+  TOGGLE_COMMENTS,
+} from "./postActionTypes";
 
 export const fetchPosts = () => ({
   type: FETCH_POSTS,

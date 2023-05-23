@@ -19,7 +19,7 @@ const Home = () => {
   const handleToggleComments = (postId) => {
     dispatch(toggleComments(postId));
   };
-
+  console.log(posts)
   return (
     <div>
       {loading ? (

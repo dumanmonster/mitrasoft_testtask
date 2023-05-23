@@ -1,10 +1,8 @@
-// userActions.js
-import axios from 'axios';
 import {
   FETCH_USER_POSTS,
+  FETCH_USER_POSTS_FAILURE,
   FETCH_USER_POSTS_SUCCESS,
-  FETCH_USER_POSTS_FAILURE
-} from './userActionTypes';
+} from "./userActionTypes";
 
 export const fetchUserPosts = (userId) => ({
   type: FETCH_USER_POSTS,

@@ -10,6 +10,11 @@ import {
   FETCH_USER_POSTS_SUCCESS,
   FETCH_USER_POSTS_FAILURE,
 } from "../actions/userActionTypes";
+import {
+  FETCH_COMMENTS,
+  FETCH_COMMENTS_SUCCESS,
+  FETCH_COMMENTS_FAILURE,
+} from "../actions/commentActionTypes";
 
 function* fetchPostsSaga() {
   try {
@@ -34,9 +39,22 @@ function* fetchUserPostsSaga(action) {
     yield put({ type: FETCH_USER_POSTS_FAILURE, payload: error.message });
   }
 }
-
+function* fetchCommentsSaga(action) {
+  try {
+    const response = yield call(
+      axios.get,
+      `https://jsonplaceholder.typicode.com/comments?postId=${action.payload}`
+    );
+    yield put({ type: FETCH_COMMENTS_SUCCESS, payload: response.data });
+  } catch (error) {
+    yield put({ type: FETCH_COMMENTS_FAILURE, payload: error.message });
+  }
+}
 function* watchFetchPosts() {
   yield takeEvery(FETCH_POSTS, fetchPostsSaga);
+}
+function* watchFetchComments() {
+  yield takeEvery(FETCH_COMMENTS, fetchCommentsSaga);
 }
 
 function* watchFetchUserPosts() {
@@ -44,5 +62,5 @@ function* watchFetchUserPosts() {
 }
 
 export default function* rootSaga() {
-  yield all([watchFetchPosts(), watchFetchUserPosts()]);
+  yield all([watchFetchPosts(), watchFetchUserPosts(), watchFetchComments()]);
 }
